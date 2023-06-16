@@ -1,4 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.scss';
 
 import { getAllGames } from '../fake-api';
@@ -21,13 +22,42 @@ import { StoreFeatureGameDetail } from 'store/feature-game-detail';
 
 export function App() {
   const navigate = useNavigate();
+  const [state, setState] = useState<{
+    data: any[],
+    loadingState: 'success' | 'error' | 'loading'
+  }>({
+    data: [],
+    loadingState: 'success'
+  });
+
+  useEffect(() => {
+    setState({
+      ...state,
+      loadingState: 'loading'
+    });
+    fetch('/api/games')
+      .then((x) => x.json())
+      .then((res) => {
+        setState({
+          ...state,
+          data: res,
+          loadingState: 'success'
+        })
+      })
+      .catch((err) => {
+        setState({
+          ...state,
+          loadingState: 'error'
+        })
+      })
+  }, []);
 
   return (
     <>
       <Header />
       <div className={styles.container}>
         <div className={styles.gamesLayout}>
-          {getAllGames().map((x) => (
+          {state.loadingState === 'loading' ? 'Loading...' : state.loadingState === 'error' ? '<div>Error retrieving data</div>' : ( state.data.map((x) => (
             <Card key={x.id} className={styles.gameCard}
               onClick={() => navigate(`/game/${x.id}`)}
             >
@@ -59,7 +89,7 @@ export function App() {
                 </CardContent>
               </CardActionArea>
             </Card>
-          ))}
+          )))}
         </div>
       </div>
 

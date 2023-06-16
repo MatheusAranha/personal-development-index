@@ -1898,7 +1898,7 @@
     webpack-node-externals "^3.0.0"
     webpack-subresource-integrity "^5.1.0"
 
-"@nx/workspace@16.3.2":
+"@nx/workspace@16.3.2", "@nx/workspace@^16.3.2":
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/@nx/workspace/-/workspace-16.3.2.tgz#145d4ee7b909d5b430d7ac9a8043d688a00d017c"
   integrity sha512-gFrJEv3+Jn2leu3RKFTakPHY8okI8hjOg8RO4OWA2ZemFXRyh9oIm/xsCsOyqYlGt06eqV2mD3GUun/05z1nhg==
