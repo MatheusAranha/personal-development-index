@@ -56,7 +56,7 @@ export function App() {
   return (
     <>
       <Header title="Board Game Hoard" />
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="app-container">
         <div className={styles.gamesLayout}>
           {state.loadingState === 'loading' ? 'Loading...' : state.loadingState === 'error' ? '<div>Error retrieving data</div>' : ( state.data.map((x) => (
             <Card key={x.id} className={styles.gameCard}
