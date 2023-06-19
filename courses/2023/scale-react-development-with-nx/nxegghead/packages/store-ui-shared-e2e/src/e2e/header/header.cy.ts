@@ -1,7 +1,7 @@
 describe('store-ui-shared: Header component', () => {
-  beforeEach(() => cy.visit('/iframe.html?id=header--primary&args=title;'));
+  beforeEach(() => cy.visit('/iframe.html?id=header--primary&args=title:Game Store;'));
 
   it('should render the component', () => {
-    cy.get('h1').should('contain', 'Welcome to Header!');
+    cy.get('.MuiTypography-root').should('contain', 'Game Store');
   });
 });
