@@ -11,14 +11,15 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
+import { Game } from 'api/util-interfaces';
 
 export const StoreFeatureGameDetail = () => {
   const { id } = useParams<{id: string}>();
   const [state, setState] = useState<{
-    data: any,
+    data: Game,
     loadingState: 'success' | 'error' | 'loading'
   }>({
-    data: {},
+    data: {} as Game,
     loadingState: 'success'
   });
 

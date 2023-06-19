@@ -3,7 +3,13 @@
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ],
         "accessToken": "MTg3ZDBjMTQtYjJiNy00Zjc5LThkMjctNmQ1OGY1ZGRlN2ZlfHJlYWQtd3JpdGU="
       }
     }

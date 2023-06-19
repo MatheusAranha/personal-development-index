@@ -19,11 +19,12 @@ import { formatRating } from 'store/utils-formatters';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { StoreFeatureGameDetail } from 'store/feature-game-detail';
+import { Game } from 'api/util-interfaces';
 
 export function App() {
   const navigate = useNavigate();
   const [state, setState] = useState<{
-    data: any[],
+    data: Game[],
     loadingState: 'success' | 'error' | 'loading'
   }>({
     data: [],
@@ -54,7 +55,7 @@ export function App() {
 
   return (
     <>
-      <Header />
+      <Header title="Board Game Hoard" />
       <div className={styles.container}>
         <div className={styles.gamesLayout}>
           {state.loadingState === 'loading' ? 'Loading...' : state.loadingState === 'error' ? '<div>Error retrieving data</div>' : ( state.data.map((x) => (
