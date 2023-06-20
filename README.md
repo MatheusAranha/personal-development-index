@@ -149,11 +149,26 @@ This is a simple document that aims to list and index evidences of personal deve
   <li>
     <details> 
       <summary>
-        <a href="https://learn.cypress.io/">[Course] Real World Testing with Cypress</a> (0%)
+        <a href="https://learn.cypress.io/">[Course] Real World Testing with Cypress</a> (4%)
       </summary>
       <ul>
         <li>
           Started: 2023-06-19
+        </li>
+        <li>
+          Finished:
+        </li>
+      </ul>
+      </details>
+  </li>
+  <li>
+    <details> 
+      <summary>
+        <a href="https://imersao.fullcycle.com.br/aulas/">[Course] Imersão FUll Stack & Full Cycle</a> (0%)
+      </summary>
+      <ul>
+        <li>
+          Started:
         </li>
         <li>
           Finished:
