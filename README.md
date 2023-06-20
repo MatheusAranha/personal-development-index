@@ -149,7 +149,7 @@ This is a simple document that aims to list and index evidences of personal deve
   <li>
     <details> 
       <summary>
-        <a href="https://learn.cypress.io/">[Course] Real World Testing with Cypress</a> (6%)
+        <a href="https://learn.cypress.io/">[Course] Real World Testing with Cypress</a> (8%)
       </summary>
       <ul>
         <li>
