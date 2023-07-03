@@ -146,17 +146,18 @@ This is a simple document that aims to list and index evidences of personal deve
       </ul>
       </details>
   </li>
+  
   <li>
     <details> 
       <summary>
-        <a href="https://learn.cypress.io/">[Course] Real World Testing with Cypress</a> (100%)
+        <a href="https://egghead.io/courses/confidently-testing-redux-applications-with-jest-typescript-16e17d9b">[Course] Confidently Testing Redux Applications with jest & TypeScript</a> (0%)
       </summary>
       <ul>
         <li>
-          Started: 2023-06-19
+          Started: 2023-07-03
         </li>
         <li>
-          Finished:2023-06-20
+          Finished:
         </li>
       </ul>
       </details>
