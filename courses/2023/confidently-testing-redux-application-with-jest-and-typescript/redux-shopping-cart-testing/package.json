@@ -40,7 +40,7 @@
       "src/**/*.{ts, tsx, js, jsx}",
       "!src/**/*.d.ts"
     ],
-    "moduleNameMappes": {
+    "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy"
     }
   }
