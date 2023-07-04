@@ -179,6 +179,21 @@ This is a simple document that aims to list and index evidences of personal deve
   <li>
     <details> 
       <summary>
+        <a href="https://www.amazon.com/Extreme-Programming-Pocket-Guide-chromatic/dp/0596004850">[Book] Extreme Programming Pocket Guide</a> (1%)
+      </summary>
+      <ul>
+        <li>
+          Started: 2023-07-03
+        </li>
+        <li>
+          Finished:
+        </li>
+      </ul>
+      </details>
+  </li>
+  <li>
+    <details> 
+      <summary>
         <a href="https://imersao.fullcycle.com.br/aulas/">[Course] Imersão FUll Stack & Full Cycle</a> (0%)
       </summary>
       <ul>
