@@ -1,9 +1,14 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithContext, getStateWithItems } from "../../test-utils";
 import { Cart } from "./Cart";
-import { Product } from "../../app/api";
+import * as api from "../../app/api";
+import { tab } from "@testing-library/user-event/dist/types/convenience";
+
+type Product = api.Product;
+
+const checkoutSpy = jest.spyOn(api, "checkout");
 
 test("an empty cart should not have any items", () => {
     renderWithContext(<Cart />);
@@ -57,5 +62,38 @@ test("removing items should update total", async () => {
     const removeCarrots = screen.getByTitle(/remove carrots/i);
     await userEvent.click(removeCarrots);
     screen.getByText("$0.00", { selector: ".total" });
-})
+});
 
+test("cannot checkout with an empty cart", async () => {
+    checkoutSpy.mockRejectedValueOnce(new Error("Cart must not be empty"));
+    renderWithContext(<Cart />);
+    const checkout = screen.getByRole("button", { name: "Checkout" });
+    const table = screen.getByRole("table");
+    expect(table).not.toHaveClass("checkoutLoading");
+    await userEvent.click(checkout);
+    // expect(table).toHaveClass("checkoutLoading");
+    await screen.findByText("Cart must not be empty");
+    expect(table).toHaveClass("checkoutError");
+});
+
+test("should clear items after checkout", async () => {
+    checkoutSpy.mockResolvedValueOnce({ success: true });
+    const state = getStateWithItems(
+        { carrots: 2, bunnies: 3 },
+        {
+             carrots: { name: "Carrots", price: 5.50 } as Product,
+             bunnies: { name: "Bunnies", price: 20.0 } as Product
+        }
+    );
+    renderWithContext(<Cart />, state);
+    screen.getByText("$71.00", { selector: ".total" });
+    expect(screen.getAllByRole("row")).toHaveLength(4);
+    const checkout = screen.getByRole("button", { name: "Checkout" });
+    await userEvent.click(checkout);
+
+    await waitFor(() => {
+        screen.getByText("$0.00", { selector: ".total" });
+        expect(screen.getAllByRole("row")).toHaveLength(2);
+        expect(screen.getByRole("table")).not.toHaveClass("checkoutError");
+    });
+});
