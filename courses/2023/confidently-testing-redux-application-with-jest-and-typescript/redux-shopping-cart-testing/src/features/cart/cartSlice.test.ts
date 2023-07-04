@@ -1,4 +1,13 @@
-import cartReducer, { CartState, addToCart, removeFromCart, updateQuantity, getNumItems, getMemoizedNumItems, getTotalPrice} from './cartSlice';
+import cartReducer, { 
+    CartState,
+    addToCart,
+    checkoutCart,
+    removeFromCart,
+    updateQuantity,
+    getNumItems,
+    getMemoizedNumItems,
+    getTotalPrice
+} from './cartSlice';
 import type { RootState } from '../../app/store';
 import products from '../../../public/products.json';
 import * as api from '../../app/api';
@@ -9,7 +18,7 @@ jest.mock("../../app/api", () => {
             return [];
         },
         async checkout(items: api.CartItems = {}) {
-            const empty = Object.keys(items).length = 0;
+            const empty = Object.keys(items).length === 0;
             if(empty) throw new Error("Must include cart items");
             if(items.badItem > 0) return { success: false };
             return { success: true }
@@ -253,6 +262,40 @@ describe("selectors", () => {
             result = getTotalPrice({ ...state });
             expect(result).toEqual("0.00");
             expect(getTotalPrice.recomputations()).toEqual(2);
+        });
+    });
+});
+
+describe("thunks", () => {
+    describe("checkoutCart with mocked dispatch", () => {
+        it("should checkout", async () => {
+            const dispatch = jest.fn();
+            const state: RootState = {
+                products: { products: {} },
+                cart: { checkoutState: "READY", errorMessage: "", items: { abc: 123 } }
+            };
+            const thunk = checkoutCart();
+            await thunk(dispatch, () => state, undefined);
+            const { calls } = dispatch.mock;
+            expect(calls).toHaveLength(2);
+            expect(calls[0][0].type).toEqual("cart/checkout/pending");
+            expect(calls[1][0].type).toEqual("cart/checkout/fulfilled");
+            expect(calls[1][0].payload).toEqual({ success: true });
+        });
+        it("should fail with no items", async () => {
+            const dispatch = jest.fn();
+            const state: RootState = {
+                products: { products: {} },
+                cart: { checkoutState: "READY", errorMessage: "", items: {} }
+            };
+            const thunk = checkoutCart();
+            await thunk(dispatch, () => state, undefined);
+            const { calls } = dispatch.mock;
+            expect(calls).toHaveLength(2);
+            expect(calls[0][0].type).toEqual("cart/checkout/pending");
+            expect(calls[1][0].type).toEqual("cart/checkout/rejected");
+            expect(calls[1][0].payload).toEqual(undefined);
+            expect(calls[1][0].error.message).toEqual("Must include cart items");
         });
     });
 });
